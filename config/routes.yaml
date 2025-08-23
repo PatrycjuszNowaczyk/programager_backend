@@ -1,0 +1,9 @@
+user_controller:
+    resource: '../src/Manager/User/Infrastructure/Controller/'
+    type: attribute
+    prefix: /api
+
+task_controller:
+    resource: '../src/Manager/Task/Infrastructure/Controller/'
+    type: attribute
+    prefix: /api
