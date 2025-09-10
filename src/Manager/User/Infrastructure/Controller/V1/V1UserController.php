@@ -32,7 +32,7 @@ final class V1UserController extends AbstractController {
         ] );
     }
 
-    #[Route( '/{id}', name: 'get_user', methods: [ 'GET' ] )]
+    #[Route( '/{id}', name: 'get_user', requirements: [ 'id' => '\d+' ], methods: [ 'GET' ] )]
     public function get_user( int $id ): JsonResponse {
 
         return new JsonResponse( [
@@ -41,7 +41,7 @@ final class V1UserController extends AbstractController {
         ] );
     }
 
-    #[Route( '/{id}', name: 'update_user', methods: [ 'PUT' ] )]
+    #[Route( '/{id}', name: 'update_user', requirements: [ 'id' => '\d+' ], methods: [ 'PUT' ] )]
     public function update_user( int $id ): JsonResponse {
 
         return new JsonResponse( [
