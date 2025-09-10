@@ -13,6 +13,11 @@ doctrine:
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+        types:
+            vo_user_id: App\Manager\User\Infrastructure\Persistence\Doctrine\Type\VOUserIdType
+        mapping_types:
+            enum: string
+
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
