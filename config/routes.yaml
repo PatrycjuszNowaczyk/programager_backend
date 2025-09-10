@@ -1,5 +1,5 @@
-user_controller:
-    resource: '../src/Manager/User/Infrastructure/Controller/'
+v1_user_controller:
+    resource: '../src/Manager/User/Infrastructure/Controller/V1/'
     type: attribute
     prefix: /api
 
