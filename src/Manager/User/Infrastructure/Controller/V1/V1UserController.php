@@ -40,4 +40,13 @@ final class V1UserController extends AbstractController {
             'id'      => $id
         ] );
     }
+
+    #[Route( '/{id}', name: 'update_user', methods: [ 'PUT' ] )]
+    public function update_user( int $id ): JsonResponse {
+
+        return new JsonResponse( [
+            'message' => 'Updating the user with id',
+            'id'      => $id
+        ] );
+    }
 }
