@@ -56,4 +56,11 @@ final class V1UserController extends AbstractController {
             'message' => 'Login user',
         ] );
     }
+
+    #[Route( '/logout', name: 'logout', methods: [ 'POST' ] )]
+    public function logout(): JsonResponse {
+        return new JsonResponse( [
+            'message' => 'Logout user',
+        ] );
+    }
 }
