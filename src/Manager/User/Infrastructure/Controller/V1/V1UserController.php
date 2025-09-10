@@ -65,7 +65,7 @@ final class V1UserController extends AbstractController {
     }
 
     #TODO remember to authenticate the user before deleting it with the token
-    #[Route( '/delete}', name: 'delete_user', methods: [ 'DELETE' ] )]
+    #[Route( '/delete', name: 'delete_user', methods: [ 'DELETE' ] )]
     public function delete_user(): JsonResponse {
         return new JsonResponse( [
             'message' => 'Deleting the user'
