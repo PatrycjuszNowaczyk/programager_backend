@@ -31,4 +31,13 @@ final class V1UserController extends AbstractController {
             'data'    => $userDto
         ] );
     }
+
+    #[Route( '/{id}', name: 'get_user', methods: [ 'GET' ] )]
+    public function get_user( int $id ): JsonResponse {
+
+        return new JsonResponse( [
+            'message' => 'This is the user with id',
+            'id'      => $id
+        ] );
+    }
 }
