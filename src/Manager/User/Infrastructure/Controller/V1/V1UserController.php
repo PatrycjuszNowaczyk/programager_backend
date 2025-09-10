@@ -1,0 +1,74 @@
+<?php
+
+declare( strict_types = 1 );
+
+namespace App\Manager\User\Infrastructure\Controller\V1;
+
+use App\Manager\User\Infrastructure\Dto\UserDto;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Attribute\Route;
+
+#[Route( '/v1/users' )]
+final class V1UserController extends AbstractController {
+    #[Route( '/', name: 'get_users', methods: [ 'GET' ] )]
+    public function get_users(): JsonResponse {
+
+        return new JsonResponse( [
+            'message' => 'List all users',
+        ] );
+    }
+
+    #[Route( '/', name: 'add_user', methods: [ 'POST' ] )]
+    public function add_user( Request $request ): JsonResponse {
+        $data = json_decode( $request->getContent(), true );
+
+        $userDto = new UserDto( 'someId', $data['email'], $data['password'], $data['role'] );
+
+        return new JsonResponse( [
+            'message' => 'Creating a new user',
+            'data'    => $userDto
+        ] );
+    }
+
+    #[Route( '/{id}', name: 'get_user', methods: [ 'GET' ] )]
+    public function get_user( int $id ): JsonResponse {
+
+        return new JsonResponse( [
+            'message' => 'This is the user with id',
+            'id'      => $id
+        ] );
+    }
+
+    #[Route( '/{id}', name: 'update_user', methods: [ 'PUT' ] )]
+    public function update_user( int $id ): JsonResponse {
+
+        return new JsonResponse( [
+            'message' => 'Updating the user with id',
+            'id'      => $id
+        ] );
+    }
+
+    #[Route( '/login', name: 'login', methods: [ 'POST' ] )]
+    public function login(): JsonResponse {
+        return new JsonResponse( [
+            'message' => 'Login user',
+        ] );
+    }
+
+    #[Route( '/logout', name: 'logout', methods: [ 'POST' ] )]
+    public function logout(): JsonResponse {
+        return new JsonResponse( [
+            'message' => 'Logout user',
+        ] );
+    }
+
+    #TODO remember to authenticate the user before deleting it with the token
+    #[Route( '/delete}', name: 'delete_user', methods: [ 'DELETE' ] )]
+    public function delete_user(): JsonResponse {
+        return new JsonResponse( [
+            'message' => 'Deleting the user'
+        ] );
+    }
+}
