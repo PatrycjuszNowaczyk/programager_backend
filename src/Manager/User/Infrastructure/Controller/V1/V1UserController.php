@@ -49,4 +49,11 @@ final class V1UserController extends AbstractController {
             'id'      => $id
         ] );
     }
+
+    #[Route( '/login', name: 'login', methods: [ 'POST' ] )]
+    public function login(): JsonResponse {
+        return new JsonResponse( [
+            'message' => 'Login user',
+        ] );
+    }
 }
