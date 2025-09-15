@@ -18,7 +18,7 @@ final class RegisterUserHandler {
 
     public function __invoke( RegisterUserCommand $command ): string {
         $user = User::register(
-            new VOUserId( uniqid() ),
+            new VOUserId(),
             new VOEmail( $command->email ),
             new VOPasswordHash( $command->password ),
             Role::USER,
