@@ -32,6 +32,8 @@ final class V1UserController extends AbstractController {
     #[Route( '/', name: 'add_user', methods: [ 'POST' ] )]
     public function add_user( Request $request ): JsonResponse {
         $data = json_decode( $request->getContent(), true );
+    #[Route( '', name: 'add_user', methods: [ 'POST' ] )]
+    public function add_user( Request $request ): Response {
 
         $userDto = new UserDto( 'someId', $data['email'], $data['password'], $data['role'] );
 
