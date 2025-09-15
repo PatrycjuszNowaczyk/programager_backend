@@ -39,4 +39,20 @@ readonly class User {
     public function getCreatedAt(): DateTimeImmutable {
         return $this->created_at;
     }
+
+    public static function register(
+        VOUserId $id,
+        VOEmail $email,
+        VOPasswordHash $password_hash,
+        Role $role,
+        DateTimeImmutable $created_at,
+    ): self {
+        return new self(
+            $id,
+            $email,
+            $password_hash,
+            $role,
+            $created_at,
+        );
+    }
 }
