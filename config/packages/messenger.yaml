@@ -27,7 +27,7 @@ framework:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
             # Commands can be async
-            'App\Manager\User\Application\Command\*': async_commands
+            'App\Manager\User\Application\Command\*': sync
             # Queries are sync by default
             'App\Manager\User\Application\Query\*': sync
 
