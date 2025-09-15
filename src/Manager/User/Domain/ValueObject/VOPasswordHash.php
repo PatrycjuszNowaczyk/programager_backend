@@ -12,12 +12,18 @@ final class VOPasswordHash {
 
     /**
      * @param string $value
+     * @param bool $isHashed Indicates if the provided value is already hashed.
      *
      * @throws InvalidArgumentException
      */
     public function __construct(
-        string $value
+        string $value, bool $isHashed = false
     ) {
+        if ( $isHashed ) {
+            $this->value = $value;
+
+            return;
+        }
 
         if ( empty( $value ) ) {
             throw new InvalidArgumentException( 'Password cannot be empty.' );
