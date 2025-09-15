@@ -4,15 +4,24 @@ declare( strict_types = 1 );
 
 namespace App\Manager\User\Infrastructure\Controller\V1;
 
-use App\Manager\User\Infrastructure\Dto\UserDto;
+use App\Manager\User\Application\Command\RegisterUserCommand;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route( '/v1/users' )]
 final class V1UserController extends AbstractController {
-    #[Route( '/', name: 'get_users', methods: [ 'GET' ] )]
+
+    public function __construct(
+        private readonly MessageBusInterface $bus
+    ) {
+    }
+
+    #[Route( '', name: 'get_users', methods: [ 'GET' ] )]
     public function get_users(): JsonResponse {
 
         return new JsonResponse( [
