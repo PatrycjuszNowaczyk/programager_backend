@@ -23,7 +23,7 @@ final class VOUserIdType extends Type {
         }
 
         if ( $value instanceof VOUserId ) {
-            return $value->getValue();
+            return $value->getValue()->toString();
         }
 
         if ( is_string( $value ) ) {
