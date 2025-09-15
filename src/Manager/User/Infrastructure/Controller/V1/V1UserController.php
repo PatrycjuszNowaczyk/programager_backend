@@ -9,7 +9,6 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -29,18 +28,29 @@ final class V1UserController extends AbstractController {
         ] );
     }
 
-    #[Route( '/', name: 'add_user', methods: [ 'POST' ] )]
-    public function add_user( Request $request ): JsonResponse {
-        $data = json_decode( $request->getContent(), true );
     #[Route( '', name: 'add_user', methods: [ 'POST' ] )]
-    public function add_user( Request $request ): Response {
+    public function add_user( Request $request ): JsonResponse {
+        try {
+            $data = json_decode( $request->getContent(), true );
 
-        $userDto = new UserDto( 'someId', $data['email'], $data['password'], $data['role'] );
+            $command = new RegisterUserCommand( $data['email'], $data['password'] );
+
+            $envelope = $this->bus->dispatch( $command );
+        } catch ( Exception $e ) {
+            return new JsonResponse( [
+                'message' => 'Error creating a new user',
+                'error'   => $e->getMessage()
+            ], 400 );
+        }
 
         return new JsonResponse( [
             'message' => 'Creating a new user',
-            'data'    => $userDto
-        ] );
+            'data' => $envelope->getMessage()
+        ], 201 );
+
+
+        //TODO return only status code 201
+//        return new Response( null, Response::HTTP_CREATED );
     }
 
     #[Route( '/{id}', name: 'get_user', requirements: [ 'id' => '\d+' ], methods: [ 'GET' ] )]
