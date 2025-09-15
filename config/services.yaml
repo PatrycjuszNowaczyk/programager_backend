@@ -17,6 +17,11 @@ services:
         resource: '../src/Manager/*/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]
 
+    App\Manager\User\Application\Command\:
+        resource: '../src/Manager/User/Application/Command/*Handler.php'
+        tags: [ 'messenger.message_handler' ]
+
+
     App\Shared\:
         resource: '../src/Shared/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]
