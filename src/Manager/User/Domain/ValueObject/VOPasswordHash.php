@@ -27,7 +27,7 @@ final class VOPasswordHash {
             throw new InvalidArgumentException( 'Password is too long.' );
         }
 
-        if ( 10 < mb_strlen( $value ) ) {
+        if ( 10 > mb_strlen( $value ) ) {
             throw new InvalidArgumentException( 'Password is too short.' );
         }
 
