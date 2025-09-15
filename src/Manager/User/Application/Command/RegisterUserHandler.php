@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Manager\User\Application\Command;
 
 use App\Manager\User\Domain\Enums\Role;
