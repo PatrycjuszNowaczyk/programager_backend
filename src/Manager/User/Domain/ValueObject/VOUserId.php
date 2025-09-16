@@ -36,4 +36,9 @@ final class VOUserId {
     public function __toString(): string {
         return $this->value->toString();
     }
+
+    public static function generateNewId(): self
+    {
+        return new self();
+    }
 }
