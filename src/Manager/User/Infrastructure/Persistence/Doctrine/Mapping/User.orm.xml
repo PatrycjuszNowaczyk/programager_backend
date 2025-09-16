@@ -31,7 +31,7 @@
             name="role"
             column="role"
             type="string"
-            enum-type="App\Manager\User\Domain\Enums\Role"
+            enum-type="App\Manager\User\Domain\Enums\UserRole"
             length="20"
             nullable="false"
             column-definition="ENUM('admin','user') DEFAULT 'user'"
