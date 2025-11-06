@@ -5,33 +5,35 @@ declare(strict_types = 1);
 namespace App\Manager\User\Application\Command;
 
 use App\Manager\User\Domain\Enums\UserRole;
+use App\Manager\User\Domain\Repository\UserRepositoryInterface;
 use App\Manager\User\Domain\User;
 use App\Manager\User\Domain\ValueObject\VOEmail;
 use App\Manager\User\Domain\ValueObject\VOPasswordHash;
 use App\Manager\User\Domain\ValueObject\VOUserId;
 use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-#[AsMessageHandler( bus: 'command.bus' )]
-final class RegisterUserHandler {
+#[AsMessageHandler(bus: 'command.bus')]
+final class RegisterUserHandler
+{
 
     public function __construct(
-        private readonly EntityManagerInterface $em
+        private readonly UserRepositoryInterface $userRepository
     ) {
     }
 
     public function __invoke(RegisterUserCommand $command): void
     {
-        $user = User::register(
-            new VOUserId(),
-            new VOEmail( $command->email ),
-            new VOPasswordHash( $command->password ),
-            UserRole::USER,
-            new DateTimeImmutable(),
-        );
+        $userData = [
+            'id'        => new VOUserId(),
+            'email'     => new VOEmail($command->email),
+            'password'  => new VOPasswordHash($command->password),
+            'role'      => UserRole::USER,
+            'createdAt' => new DateTimeImmutable(),
+        ];
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $user = User::register(...array_values($userData));
+
+        $this->userRepository->save($user);
     }
 }

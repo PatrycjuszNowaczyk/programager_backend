@@ -24,6 +24,7 @@ services:
         resource: '../src/Manager/User/Application/Command/*Handler.php'
         tags: [ 'messenger.message_handler' ]
 
+    App\Manager\User\Domain\Repository\UserRepositoryInterface: '@App\Manager\User\Infrastructure\Persistence\Doctrine\Repository\DoctrineUserRepository'
 
     App\Shared\:
         resource: '../src/Shared/Infrastructure/Controller/'
