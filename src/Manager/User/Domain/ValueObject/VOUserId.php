@@ -40,6 +40,11 @@ final class VOUserId
         return $this->value->toString();
     }
 
+    /**
+     * Generates a new user id.
+     *
+     * @return self
+     */
     public static function generateNewId(): self
     {
         return new self();
