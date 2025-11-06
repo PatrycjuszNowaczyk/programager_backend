@@ -8,6 +8,7 @@ use Symfony\Component\Uid\Uuid;
 
 final class VOUserId
 {
+    // TODO change uuid to string
     private Uuid $value;
 
     /**
