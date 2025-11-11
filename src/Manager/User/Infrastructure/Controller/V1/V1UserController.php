@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class V1UserController extends AbstractController {
 
     public function __construct(
-        private readonly MessageBusInterface $bus
+        private readonly MessageBusInterface $messageBus
     ) {
     }
 
@@ -35,7 +35,7 @@ final class V1UserController extends AbstractController {
 
             $command = new RegisterUserCommand( $data['email'], $data['password'] );
 
-            $envelope = $this->bus->dispatch( $command );
+            $envelope = $this->messageBus->dispatch($command);
         } catch ( Exception $e ) {
             return new JsonResponse( [
                 'message' => 'Error creating a new user',
