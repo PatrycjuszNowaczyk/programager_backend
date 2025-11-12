@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Manager\User\Application\Command;
 
-use App\Manager\User\Domain\Enums\UserRole;
+use App\Manager\User\Domain\Enums\EnumUserRole;
 use App\Manager\User\Domain\Repository\UserRepositoryInterface;
 use App\Manager\User\Domain\User;
 use App\Manager\User\Domain\ValueObject\VOEmail;
@@ -28,7 +28,7 @@ final class RegisterUserHandler
             'id'        => new VOUserId(),
             'email'     => new VOEmail($command->email),
             'password'  => new VOPasswordHash($command->password),
-            'role'      => UserRole::USER,
+            'role' => EnumUserRole::USER,
             'createdAt' => new DateTimeImmutable(),
         ];
 

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace App\Manager\User\Domain;
 
-use App\Manager\User\Domain\Enums\UserRole;
+use App\Manager\User\Domain\Enums\EnumUserRole;
 use App\Manager\User\Domain\ValueObject\VOEmail;
 use App\Manager\User\Domain\ValueObject\VOPasswordHash;
 use App\Manager\User\Domain\ValueObject\VOUserId;
@@ -15,7 +15,7 @@ readonly class User {
         private VOUserId $id,
         private VOEmail $email,
         private VOPasswordHash $password_hash,
-        private UserRole $role,
+        private EnumUserRole $role,
         private DateTimeImmutable $created_at,
     ) {
     }
@@ -32,7 +32,7 @@ readonly class User {
         return $this->password_hash;
     }
 
-    public function getRole(): UserRole
+    public function getRole(): EnumUserRole
     {
         return $this->role;
     }
@@ -45,7 +45,7 @@ readonly class User {
         VOUserId $id,
         VOEmail $email,
         VOPasswordHash $password_hash,
-        UserRole $role,
+        EnumUserRole $role,
         DateTimeImmutable $created_at,
     ): self {
         return new self(
