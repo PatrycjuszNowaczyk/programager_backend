@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App\Manager\User\Application\Command;
 
-use App\Manager\User\Domain\Enums\EnumUserRole;
+use App\Manager\User\Domain\Enum\EnumUserRole;
 use App\Manager\User\Domain\Repository\UserRepositoryInterface;
 use App\Manager\User\Domain\User;
 use App\Manager\User\Domain\ValueObject\VOEmail;
